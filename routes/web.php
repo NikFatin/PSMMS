@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     });
 
+    
     Route::group(['middleware' => 'role:coordinator', 'prefix' => 'coordinator', 'as' => 'coordinator.'], function() {
 
     });
