@@ -3,6 +3,7 @@
 use App\Http\Controllers\Supervisors\ExpertiseController;
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\TitleController;
+use App\Http\Controllers\SupervisorHuntingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'role:student', 'prefix' => 'student', 'as' => 'student.'], function() {
         Route::get('viewExpertise', [ExpertiseController::class, 'indexStudent']);
         Route::resource('viewTitle', App\Http\Controllers\Students\TitleController::class);
+        Route::get('svHunting', [SupervisorHuntingController::class, 'index']);
 
 
     });
@@ -44,7 +46,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     });
 
-    
+
     Route::group(['middleware' => 'role:coordinator', 'prefix' => 'coordinator', 'as' => 'coordinator.'], function() {
 
     });

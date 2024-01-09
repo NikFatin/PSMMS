@@ -5,10 +5,15 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 bg-teal-500">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-welcome />
+                @if(auth()->user()->role_id == 2)
+                    @livewire('student-request')
+                @elseif(auth()->user()->role_id == 3)
+                    {{-- Content for supervisor role (role_id = 3) --}}
+                    <p>Welcome, Supervisor! Here's your supervisor-specific content.</p>
+                @endif
             </div>
         </div>
     </div>

@@ -44,11 +44,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role_id ==2;
         });
 
-        Gate::define('manage-title-request', function (User $user) {
-            return $user->role_id ==2;
-        });
-
-        Gate::define('manage-supervisor-request', function (User $user) {
+        Gate::define('manage-request', function (User $user) {
             return $user->role_id ==2;
         });
 

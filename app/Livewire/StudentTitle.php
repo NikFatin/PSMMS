@@ -32,15 +32,43 @@ class StudentTitle extends Component
         }
     }
 
-    public function requestTitle($id)
+    public function requestTitle()
     {
+        // Assuming you have a property to store the selected title_id
+        $selectedTitleId = $this->selectedTitleId;
+
+        // Validate if the title_id is selected
+        if (!$selectedTitleId) {
+            // You can handle this case as needed, e.g., show an error message
+            $this->addError('selectedTitleId', 'Please select a title before saving.');
+            return;
+        }
+
+        // Assuming you have a property to store the student_id
+        $studentId = auth()->user()->student->id; // Adjust this based on your authentication setup
+
+        // Create a new request record
         Request::create([
-            'student_id' => auth()->user()->id,
-            'title_id' => $id,
+            'student_id' => $studentId,
+            'title_id' => $selectedTitleId,
+            'supervisor_id' => null, // Since this is a title request, you can set supervisor_id to null
         ]);
 
-        $this->emit('refreshComponent');
+        // Clear any previous errors (if any)
+        $this->resetErrorBag();
+
+        // Optionally, you can perform additional logic or show a success message
+
+        // Reset any necessary properties after the request is saved
+        $this->selectedTitleId = null; // Reset the selected title_id
+
+        // Emit an event to notify other components (if needed)
+        $this->emit('titleRequested');
+
+        // Optionally, you can redirect the user or perform other actions
+        // return redirect()->to('/dashboard');
     }
+
 
 
     public function render()
